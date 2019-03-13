@@ -1,7 +1,6 @@
 package com.sephiroth.common.app;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,11 +8,17 @@ import android.support.v7.app.AppCompatActivity;
 
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * @author Sephiroth on 2019/3/12.
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
+
+    private Unbinder mUnbinder;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +36,13 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 初始化窗口
      */
     protected void initWindow() {
+
     }
 
     /**
      * 初始化界面传递数据
      *
-     * @param bundle android组件间传递数据bundle
+     * @param bundle 组件间传递数据bundle
      * @return 传递数据正确返回true，传递数据错误返回false，不复写时默认返回true
      */
     protected boolean initArgs(Bundle bundle) {
@@ -54,6 +60,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 初始化布局资源
      */
     protected void initWidget() {
+        mUnbinder = ButterKnife.bind(this);
     }
 
     /**
@@ -78,16 +85,18 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         FragmentManager fragmentManager = getSupportFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
-        for (Fragment fragment : fragments) {
-            if (fragment instanceof BaseFragment) {
-                ((BaseFragment) fragment).onBackPressed();
-                return;
+        if (fragments != null && fragments.size() > 0) {
+            for (Fragment fragment : fragments) {
+                if (fragment instanceof BaseFragment) {
+                    if (((BaseFragment) fragment).onBackPressed()) {
+                        return;
+                    }
+                }
             }
         }
-
+        super.onBackPressed();
         finish();
     }
 }

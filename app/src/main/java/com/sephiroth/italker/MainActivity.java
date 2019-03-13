@@ -5,23 +5,28 @@ import android.widget.TextView;
 
 import com.sephiroth.common.app.BaseActivity;
 
-public class MainActivity extends BaseActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private TextView mTest;
+public class MainActivity extends BaseActivity {
+    @BindView(R.id.tv_test)
+    TextView mTextView;
 
     @Override
     protected int getContentLayoutId() {
         return R.layout.activity_main;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void initWidget() {
-        mTest = findViewById(R.id.tv_test);
+        super.initWidget();
+        mTextView.setText("butterKnife");
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void initData() {
-        mTest.setText("hello world");
+        super.initData();
     }
 }
