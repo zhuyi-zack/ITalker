@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.sephiroth.common.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,8 +28,17 @@ public abstract class RecyclerAdapter<Data>
     private final List<Data> mDataList;
     private onClickListener<Data> mClickListener;
 
-    public RecyclerAdapter(ArrayList<Data> dataList) {
+    public RecyclerAdapter() {
+        this(null);
+    }
+
+    public RecyclerAdapter(onClickListener<Data> clickListener) {
+        this(new ArrayList<Data>(), clickListener);
+    }
+
+    public RecyclerAdapter(ArrayList<Data> dataList, onClickListener<Data> clickListener) {
         mDataList = dataList;
+        mClickListener = clickListener;
     }
 
     @Override
@@ -126,14 +136,54 @@ public abstract class RecyclerAdapter<Data>
         notifyItemChanged(mDataList.size() - 1);
     }
 
-    public void add(Data... data) {
-        if (data == null) {
+    /**
+     * 向当前RecyclerView的末尾添加多条数据
+     *
+     * @param datas Data类型的数组
+     */
+    public void add(Data... datas) {
+        if (datas == null) {
             return;
         }
-        Collections.addAll(mDataList, data);
+        Collections.addAll(mDataList, datas);
         int positionStart = mDataList.size();
-        notifyItemRangeChanged(positionStart, data.length);
+        notifyItemRangeChanged(positionStart, datas.length);
     }
+
+    /**
+     * 向当前RecyclerView的末尾添加多条数据
+     *
+     * @param datas Data类型的集合
+     */
+    public void add(Collection<Data> datas) {
+        if (datas == null) {
+            return;
+        }
+        mDataList.addAll(datas);
+        int positionStart = mDataList.size();
+        notifyItemRangeChanged(positionStart, datas.size());
+    }
+
+    /**
+     * 清空当前ViewType的RecyclerView数据
+     */
+    public void clear() {
+        mDataList.clear();
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 替换当前ViewType的RecyclerView数据
+     */
+    public void replace(Collection<Data> datas) {
+        if (datas == null) {
+            return;
+        }
+        mDataList.clear();
+        mDataList.addAll(datas);
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public boolean onLongClick(View v) {
