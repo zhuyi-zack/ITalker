@@ -36,5 +36,12 @@ ext {
 
     //依赖库相关
     supportVersion = '27.1.1'
+    //butterknife
     butterknifeVersion = '8.5.1'
+    //常用的资源和主题版本
+    geniusVersion = '2.0.0'
+    //glide图片加载框架版本
+    glideVersion = '4.9.0'
+    //圆形头像版本
+    circleimageviewVersion = '3.0.0'
 }

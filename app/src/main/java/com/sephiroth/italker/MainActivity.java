@@ -6,7 +6,6 @@ import android.widget.TextView;
 import com.sephiroth.common.app.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.tv_test)
