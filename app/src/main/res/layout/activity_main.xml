@@ -1,22 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.sephiroth.italker.MainActivity">
 
-    <TextView
-        android:id="@+id/tv_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Hello World!"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionBarWithStatusBarSize"
+        android:elevation="@dimen/len_2"
+        tools:targetApi="lollipop">
 
-</LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/statusBarSize">
+
+            <com.sephiroth.common.widget.PortraitView
+                android:id="@+id/portrait"
+                android:layout_width="@dimen/len_40"
+                android:layout_height="@dimen/len_40"
+                android:layout_margin="@dimen/len_4"
+                android:foreground="@drawable/ic_touch_menu"
+                android:padding="@dimen/len_4"
+                android:src="@drawable/default_portrait" />
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textAppearance="@style/TextAppearance.Title" />
+
+            <ImageView
+                android:id="@+id/im_search"
+                android:layout_width="@dimen/len_40"
+                android:layout_height="@dimen/len_40"
+                android:layout_gravity="end|center_vertical"
+                android:foreground="@drawable/ic_touch_menu"
+                android:padding="@dimen/len_10"
+                android:src="@drawable/ic_search" />
+        </FrameLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/lay_containar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/len_52"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </FrameLayout>
+
+    <net.qiujuer.genius.ui.widget.FloatActionButton
+        android:id="@+id/float_action_button"
+        android:layout_width="@dimen/len_44"
+        android:layout_height="@dimen/len_44"
+        android:layout_marginBottom="@dimen/len_68"
+        android:layout_marginEnd="@dimen/len_16"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_group_add"
+        app:layout_anchor="@id/lay_containar"
+        app:layout_anchorGravity="bottom|end" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_52"
+        android:layout_gravity="bottom"
+        android:background="@color/grey_200">
+
+
+    </android.support.design.widget.BottomNavigationView>
+
+</android.support.design.widget.CoordinatorLayout>

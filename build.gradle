@@ -41,7 +41,7 @@ ext {
     //常用的资源和主题版本
     geniusVersion = '2.0.0'
     //glide图片加载框架版本
-    glideVersion = '4.9.0'
+    glideVersion = '3.8.0'
     //圆形头像版本
     circleimageviewVersion = '3.0.0'
 }
