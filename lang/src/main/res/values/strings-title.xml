@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_home">Active</string>
+    <string name="title_group">Group</string>
+    <string name="title_contact">Contact</string>
+</resources>
